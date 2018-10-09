@@ -617,7 +617,7 @@ function cwvtc_get_mpk_data_network( $mpk_data, $currency, $options ) {
  * @return array
  */
 function cwvtc_force_update_exchange_rates( $results ) {
-	$results['vtc'] = CW_ExchangeRates::update_altcoin_fiat_rates( 'VTC', false, true );
+	$results['vtc'] = CW_ExchangeRates::processing()->update_coin_fiat_rates( 'VTC', false, true );
 
 	return $results;
 }
@@ -631,7 +631,7 @@ function cwvtc_force_update_exchange_rates( $results ) {
  * @return array
  */
 function cwvtc_cron_update_exchange_data( $data, $options ) {
-	$vtc = CW_ExchangeRates::update_altcoin_fiat_rates( 'VTC', $options );
+	$vtc = CW_ExchangeRates::processing()->update_coin_fiat_rates( 'VTC', $options );
 
 	// Maybe log exchange rate updates
 	if ( (bool) $options['logging']['rates'] ) {
