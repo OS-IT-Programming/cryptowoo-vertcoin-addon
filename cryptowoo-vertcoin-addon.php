@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Forked From: Olsm/cryptowoo-bitcoin-cash-addon
  * - Bitcoin Cash Addon was Forked From: CryptoWoo/cryptowoo-dash-addon, Author: flxstn
  * Description: Accept VTC payments in WooCommerce. Requires CryptoWoo main plugin and CryptoWoo HD Wallet Add-on.
- * Version: 1.1
+ * Version: 1.1.1
  * Author: Olav Småriset
  * Author URI: https://github.com/Olsm
  * License: GPLv2
@@ -149,20 +149,18 @@ if ( cwvtc_hd_enabled() ) {
 }
 
 /**
- * Vertcoin font color for aw-cryptocoins
+ * Font color for aw-cryptocoins
  * see cryptowoo/assets/fonts/aw-cryptocoins/cryptocoins-colors.css
  */
-function cwvtc_coin_icon_color() { ?>
+function cwdash_coin_icon_color() {
+	?>
     <style type="text/css">
-        i.cc.VTC:before, i.cc.VTC-alt:before {
-            content: "\e92c";
-        }
-
-        i.cc.VTC, i.cc.VTC-alt {
+        i.cc.<?php echo esc_attr( 'VTC' ); ?>, i.cc.<?php echo esc_attr( 'VTC-alt' ); ?> {
             color: #1b5c2e;
         }
     </style>
-<?php }
+	<?php
+}
 
 add_action( 'wp_head', 'cwvtc_coin_icon_color' );
 
