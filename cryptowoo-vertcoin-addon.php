@@ -152,7 +152,7 @@ if ( cwvtc_hd_enabled() ) {
  * Font color for aw-cryptocoins
  * see cryptowoo/assets/fonts/aw-cryptocoins/cryptocoins-colors.css
  */
-function cwdash_coin_icon_color() {
+function cwvtc_coin_icon_color() {
 	?>
     <style type="text/css">
         i.cc.<?php echo esc_attr( 'VTC' ); ?>, i.cc.<?php echo esc_attr( 'VTC-alt' ); ?> {
