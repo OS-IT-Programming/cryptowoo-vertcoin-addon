@@ -468,8 +468,7 @@ function cwvtc_vertcoin_api_tx_update($address, $order, $options) {
  */
 function cwvtc_validate_custom_api_genesis( $genesis, $field_id ) {
 	if ( in_array( $field_id, array( 'custom_api_vtc', 'processing_fallback_url_vtc' ) ) ) {
-		$genesis = '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f';
-		//$genesis  = '00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048'; // 1
+		$genesis = '4d96a915f49d40b1e5c2844d1ee2dccb90013a990ccea12c492d22110489f0c4';
 	}
 
 	return $genesis;
