@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Forked From: Olsm/cryptowoo-bitcoin-cash-addon
  * - Bitcoin Cash Addon was Forked From: CryptoWoo/cryptowoo-dash-addon, Author: flxstn
  * Description: Accept VTC payments in WooCommerce. Requires CryptoWoo main plugin and CryptoWoo HD Wallet Add-on.
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: We Program IT | legal company name: OS IT Programming AS | Company org nr: NO 921 074 077
  * Author URI: https://weprogram.it
  * License: GPLv2
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  */
 
-define( 'CWVTC_VER', '1.1' );
+define( 'CWVTC_VER', '1.1.2' );
 define( 'CWVTC_FILE', __FILE__ );
 $cw_dir = WP_PLUGIN_DIR . "/cryptowoo";
 $cw_license_path = "$cw_dir/am-license-menu.php";
@@ -941,8 +941,8 @@ function cwvtc_add_fields() {
 		'type'              => 'text',
 		'title'             => sprintf( __( '%s Insight API URL', 'cryptowoo' ), 'Vertcoin' ),
 		'subtitle'          => sprintf( __( 'Connect to any %sInsight API%s instance.', 'cryptowoo' ), '<a href="https://github.com/bitpay/insight-api/" title="Insight API" target="_blank">', '</a>' ),
-		'desc'              => sprintf( __( 'The root URL of the API instance:%sLink to address:%sexplorer.vertcoin.info/ext/getaddress/%sRoot URL: %explorer.vertcoin.info%s', 'cryptowoo-vtc-addon' ), '<p>', '<code>', '</code><br>', '<code>', '</code></p>' ),
-		'placeholder'       => 'explorer.vertcoin.info',
+		'desc'              => sprintf( __( 'The root URL of the API instance:%sLink to address: %shttp://insight.vertcoin.org/insight-vtc-api/ext/getaddress/%sRoot URL: %shttp://insight.vertcoin.org/insight-vtc-api/%s', 'cryptowoo-vtc-addon' ), '<p>', '<code>', '</code><br>', '<code>', '</code></p>' ),
+		'placeholder'       => 'http://insight.vertcoin.org/insight-vtc-api/',
 		'required'          => array( 'processing_api_vtc', 'equals', 'custom' ),
 		'validate_callback' => 'redux_validate_custom_api',
 		'ajax_save'         => false,
