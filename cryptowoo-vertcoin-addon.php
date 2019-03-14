@@ -1075,7 +1075,7 @@ function cwvtc_add_fields() {
 	 * Currency Switcher plugin decimals
 	 */
 	Redux::setField( 'cryptowoo_payments', array(
-		'section_id' => 'rewriting-switcher',
+		'section_id' => 'pricing-decimals',
 		'id'         => 'decimals_VTC',
 		'type'       => 'select',
 		'title'      => sprintf( __( '%s amount decimals', 'cryptowoo' ), 'Vertcoin' ),
