@@ -993,7 +993,7 @@ function cwvtc_add_fields() {
 			'poloniex'   => 'Poloniex',
 			'shapeshift' => 'ShapeShift'
 		),
-		'default'           => 'poloniex',
+		'default'           => 'coingecko',
 		'ajax_save'         => false, // Force page load when this changes
 		'validate_callback' => 'redux_validate_exchange_api',
 		'select2'           => array( 'allowClear' => false )
