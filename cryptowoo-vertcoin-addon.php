@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Forked From: Olsm/cryptowoo-bitcoin-cash-addon
  * - Bitcoin Cash Addon was Forked From: CryptoWoo/cryptowoo-dash-addon, Author: flxstn
  * Description: Accept VTC payments in WooCommerce. Requires CryptoWoo main plugin and CryptoWoo HD Wallet Add-on.
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: We Program IT | legal company name: OS IT Programming AS | Company org nr: NO 921 074 077
  * Author URI: https://weprogram.it
  * License: GPLv2
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * WC tested up to: 3.2.5
  */
 
-define( 'CWVTC_VER', '1.2.1' );
+define( 'CWVTC_VER', '1.2.2' );
 
 // Load the plugin update library.
 add_action( 'cryptowoo_api_manager_loaded', function () {
@@ -988,11 +988,12 @@ function cwvtc_add_fields() {
 		'subtitle'          => sprintf( __( 'Choose the exchange you prefer to use to calculate the %sVertcoin to Bitcoin exchange rate%s', 'cryptowoo' ), '<strong>', '</strong>.' ),
 		'desc'              => sprintf( __( 'Cross-calculated via BTC/%s', 'cryptowoo' ), $woocommerce_currency ),
 		'options'           => array(
+			'coingecko'  => 'CoinGecko',
 			'bittrex'    => 'Bittrex',
 			'poloniex'   => 'Poloniex',
 			'shapeshift' => 'ShapeShift'
 		),
-		'default'           => 'poloniex',
+		'default'           => 'coingecko',
 		'ajax_save'         => false, // Force page load when this changes
 		'validate_callback' => 'redux_validate_exchange_api',
 		'select2'           => array( 'allowClear' => false )
