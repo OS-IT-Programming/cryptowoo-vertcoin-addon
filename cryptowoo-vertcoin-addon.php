@@ -988,6 +988,7 @@ function cwvtc_add_fields() {
 		'subtitle'          => sprintf( __( 'Choose the exchange you prefer to use to calculate the %sVertcoin to Bitcoin exchange rate%s', 'cryptowoo' ), '<strong>', '</strong>.' ),
 		'desc'              => sprintf( __( 'Cross-calculated via BTC/%s', 'cryptowoo' ), $woocommerce_currency ),
 		'options'           => array(
+			'coingecko'  => 'CoinGecko',
 			'bittrex'    => 'Bittrex',
 			'poloniex'   => 'Poloniex',
 			'shapeshift' => 'ShapeShift'
