@@ -879,7 +879,7 @@ function cwvtc_add_fields() {
 		'id'       => 'custom_api_confidence',
 		'type'     => 'switch',
 		'title'    => __('Third Party Confidence Metrics', 'cryptowoo'),
-		'subtitle' => __('Enable this to use the chain.so confidence metrics when accepting zeroconf transactions with your custom Bitcoin, Litecoin, or Dogecoin API.', 'cryptowoo'),
+		'subtitle' => __('Enable this to use the SoChain confidence metrics when accepting zeroconf transactions with your custom Bitcoin, Litecoin, or Dogecoin API.', 'cryptowoo'),
 		'default'  => false,
 	));
     */
