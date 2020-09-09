@@ -620,15 +620,12 @@ function cwvtc_force_update_exchange_rates( $results ) {
  * @return array
  */
 function cwvtc_cron_update_exchange_data( $data, $options ) {
-	$vtc = CW_ExchangeRates::processing()->update_coin_fiat_rates( 'VTC', $options );
+	$vtc = CW_ExchangeRates::processing()->update_coin_rates( 'VTC', $options );
 
-	// Maybe log exchange rate updates
-	if ( (bool) $options['logging']['rates'] ) {
-		if ( $vtc['status'] === 'not updated' || strpos( $vtc['status'], 'disabled' ) ) {
-			$data['vtc'] = strpos( $vtc['status'], 'disabled' ) ? $vtc['status'] : $vtc['last_update'];
-		} else {
-			$data['vtc'] = $vtc;
-		}
+	if ( array_key_exists( 'status', $vtc ) && ( $vtc['status'] === 'not updated' || strpos( $vtc['status'], 'disabled' ) ) ) {
+		$data['vtc'] = strpos( $vtc['status'], 'disabled' ) ? $vtc['status'] : $vtc['last_update'];
+	} else {
+		$data['vtc'] = $vtc;
 	}
 
 	return $data;
