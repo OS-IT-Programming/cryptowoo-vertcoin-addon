@@ -288,9 +288,19 @@ function cwvtc_processing_config( $pc_conf, $currency, $options ) {
  * @return string
  */
 function cwvtc_link_to_address( $url, $address, $currency, $options ) {
-	if ( $currency === 'VTC' ) {
-		$url = "http://explorer.vertcoin.info/address/{$address}";
-		if ( $options['preferred_block_explorer_vtc'] === 'custom' && isset( $options['custom_block_explorer_vtc'] ) ) {
+	if ( 'VTC' === $currency ) {
+		$preferred_block_explorer = cw_get_option( 'preferred_block_explorer_vtc' );
+		if ( 'autoselect' === $preferred_block_explorer ) {
+			$preferred_block_explorer = cw_get_option( 'processing_api_vtc' );
+		}
+
+		if ( 'vertcoinorg' === $preferred_block_explorer ) {
+			return "https://insight.vertcoin.org/address/{$address}";
+		} elseif ( 'vertcoin.info' === $preferred_block_explorer ) {
+			return "http://explorer.vertcoin.info/address/{$address}";
+		} elseif ( 'cryptoid' === $preferred_block_explorer ) {
+			return "https://chainz.cryptoid.info/vtc/address.dws?{$address}";
+		} elseif ( 'custom' === $preferred_block_explorer && isset( $options['custom_block_explorer_vtc'] ) ) {
 			$url = preg_replace( '/{{ADDRESS}}/', $address, $options['custom_block_explorer_vtc'] );
 			if ( ! wp_http_validate_url( $url ) ) {
 				$url = '#';
@@ -315,7 +325,7 @@ function cwvtc_link_to_address( $url, $address, $currency, $options ) {
 function cwvtc_cw_update_tx_details( $batch_data, $batch_currency, $orders, $processing, $options ) {
 	if ( $batch_currency == "VTC" && $options['processing_api_vtc'] == "vertcoin.info" ) {
 		$options['custom_api_vtc']     = "http://explorer.vertcoin.info/";
-		$batch                         = $orders[0]->address;
+		$batch                         = current( $orders )->address;
 		$batch_data[ $batch_currency ] = cwvtc_vertcoin_api_tx_update( $batch, $orders[0], $options );
 		usleep( 333333 ); // Max ~3 requests/second TODO remove when we have proper rate limiting
 
@@ -398,6 +408,7 @@ function cwvtc_vertcoin_api_get_block_height($options) {
 	return (int)$block_height;
 }
 
+// TODO: Replace with real block explorer api class.
 function cwvtc_vertcoin_api_tx_update($address, $order, $options) {
     $currency = "VTC";
 	$error = $result = false;
@@ -894,9 +905,11 @@ function cwvtc_add_fields() {
 		'title'             => sprintf( __( '%s Processing API', 'cryptowoo' ), 'Vertcoin' ),
 		'subtitle'          => sprintf( __( 'Choose the API provider you want to use to look up %s payments.', 'cryptowoo' ), 'Vertcoin' ),
 		'options'           => array(
-			'vertcoin.info' => 'explorer.vertcoin.info',
-			'custom'     => __( 'Custom (insight)', 'cryptowoo' ),
-			'disabled'   => __( 'Disabled', 'cryptowoo' ),
+			'vertcoinorg'   => 'Vertcoin.org (insight.vertcoin.org)',
+			'vertcoin.info' => 'Vertcoin.info (explorer.vertcoin.info)',
+			'cryptoid'      => 'CryptoID (chainz.cryptoid.info)',
+			'custom'        => __( 'Custom (insight)', 'cryptowoo' ),
+			'disabled'      => __( 'Disabled', 'cryptowoo' ),
 		),
 		'desc'              => '',
 		'default'           => 'disabled',
@@ -1026,11 +1039,13 @@ function cwvtc_add_fields() {
 		'subtitle'   => sprintf( __( 'Choose the block explorer you want to use for links to the %s blockchain.', 'cryptowoo' ), 'Vertcoin' ),
 		'desc'       => '',
 		'options'    => array(
-			'autoselect' => __( 'Autoselect by processing API', 'cryptowoo' ),
+			'autoselect'    => __( 'Autoselect by processing API', 'cryptowoo' ),
+			'vertcoinorg'   => 'insight.vertcoin.org',
+			'cryptoid'      => 'chainz.cryptoid.info',
 			'vertcoin.info' => 'explorer.vertcoin.info',
-			'custom'     => __( 'Custom (enter URL below)' ),
+			'custom'        => __( 'Custom (enter URL below)' ),
 		),
-		'default'    => 'vertcoin.info',
+		'default'    => 'autoselect',
 		'select2'    => array( 'allowClear' => false )
 	) );
 
