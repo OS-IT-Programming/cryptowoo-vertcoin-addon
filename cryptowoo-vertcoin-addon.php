@@ -894,6 +894,8 @@ function cwvtc_add_fields() {
 
 	// Remove blockcypher token field
 	Redux::removeField( 'cryptowoo_payments', 'blockcypher_token', false );
+	// Remove CryptoID token field
+	Redux::removeField( 'cryptowoo_payments', 'cryptoid_api_key', false );
 
 	/*
 	 * Processing API
@@ -917,6 +919,18 @@ function cwvtc_add_fields() {
 		'validate_callback' => 'redux_validate_processing_api',
 		'select2'           => array( 'allowClear' => false ),
 	) );
+	Redux::setField( 'cryptowoo_payments', array(
+		'section_id' => 'processing-api',
+		'id'         => 'processing_api_vtc_cryptoid_info',
+		'type'       => 'info',
+		'style'      => 'critical',
+		'icon'       => 'el el-warning-sign',
+		'title'      => __( 'cryptoID API Key required', 'cryptowoo' ),
+		'required'   => array(
+			array( 'processing_api_vtc', 'equals', 'cryptoid' ),
+		),
+		'desc'       => sprintf( __( 'Please enter your cryptoID API key below. Otherwise payment data will be delayed by up to 6 hours.%shttps://chainz.cryptoid.info/api.dws%s', 'cryptowoo' ), '<br><a href="https://chainz.cryptoid.info/api.dws" title="cryptoID API Docs" target="_blank">', '</a></br>' ),
+    ));
 
 	/*
 	 * Processing API custom URL warning
@@ -966,6 +980,17 @@ function cwvtc_add_fields() {
 		'title'             => __( 'BlockCypher Token (optional)', 'cryptowoo' ),
 		'subtitle'          => sprintf( __( 'Use the API token from your %sBlockCypher%s account.', 'cryptowoo' ), '<strong><a href="https://accounts.blockcypher.com/" title="BlockCypher account vtcboard" target="_blank">', '</a></strong>' ),
 		'validate_callback' => 'redux_validate_token'
+	) );
+	// Re-add CryptoID token field
+	Redux::setField( 'cryptowoo_payments', array(
+		'section_id' => 'processing-api',
+		'id'         => 'cryptoid_api_key',
+		'type'       => 'text',
+		'ajax_save'  => false, // Force page load when this changes
+		'desc'       => sprintf(__('%sMore info%s', 'cryptowoo'), '<a href="https://chainz.cryptoid.info/api.dws" title="cryptoID API Docs" target="_blank">', '</a>'),
+		'title'      =>  __('cryptoID API Key (required)', 'cryptowoo'),
+		'subtitle'   => sprintf(__('Use the API token from your %sCryptoID%s account.', 'cryptowoo'), '<strong><a href="https://chainz.cryptoid.info/api.key.dws" title="Request cryptoID API Key" target="_blank">', '</a></strong>'),
+		//'validate_callback' => 'redux_validate_token',
 	) );
 
 	// API Resource control information
