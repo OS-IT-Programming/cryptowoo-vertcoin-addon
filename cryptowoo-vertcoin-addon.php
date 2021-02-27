@@ -84,7 +84,7 @@ function cwvtc_hd_enabled() {
 
 if ( cwvtc_hd_enabled() ) {
 	// Coin symbol and name
-	add_filter( 'woocommerce_currencies', 'cwvtc_woocommerce_currencies', 10, 1 );
+	add_filter( 'cw_get_cryptocurrencies', 'cwvtc_woocommerce_currencies', 10, 1 );
 	add_filter( 'cw_get_currency_symbol', 'cwvtc_get_currency_symbol', 10, 2 );
 	add_filter( 'cw_get_enabled_currencies', 'cwvtc_add_coin_identifier', 10, 1 );
 
